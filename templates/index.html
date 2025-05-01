@@ -4,20 +4,20 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="static/bin.png">
   <title>Decimal Converter</title>
-  <style>
+   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cascadia+Code:ital,wght@0,200..700;1,200..700&display=swap');
-
     html, body {
       height: 100%;
       margin: 0;
       font-family: 'Cascadia Code';
       display: flex;
       flex-direction: column;
-      background-color: #f4f4f4;
+      background-color: #121212;
+      color: #fff;
     }
 
     nav {
-      background-color: #333;
+      background-color: #1f1f1f;
       color: #fff;
       padding: 1em;
       text-align: center;
@@ -29,7 +29,7 @@
     }
 
     nav a:hover {
-      background-color: black;
+      background-color: #000;
     }
 
     main {
@@ -37,8 +37,9 @@
       padding: 2em;
       max-width: 900px;
       margin: auto;
-      background-color: #fff;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #1e1e1e;
+      box-shadow: none;
+      border: 1px solid #333;
     }
 
     form {
@@ -51,23 +52,26 @@
     input[type="text"], input[type="number"] {
       padding: 0.5em;
       font-size: 1em;
+      background-color: #333;
+      color: #fff;
+      border: 1px solid #555;
     }
 
     button {
       padding: 0.5em;
       font-size: 1em;
-      background-color: #333;
+      background-color: #555;
       color: white;
       border: none;
       cursor: pointer;
     }
 
     button:hover {
-      background-color: #555;
+      background-color: #777;
     }
 
     .error {
-      color: red;
+      color: #ff6666;
     }
 
     .results ul {
@@ -88,9 +92,11 @@
     }
 
     th, td {
-      border: 1px solid #ccc;
+      border: 1px solid #444;
       padding: 0.5em;
       text-align: center;
+      background-color: #2a2a2a;
+      color: white;
     }
 
     thead {
@@ -98,23 +104,14 @@
       color: white;
     }
 
-    .hov, .hov2, .toggle {
-      transition: transform 0.2s ease;
-      display: inline-block;
-    }
-
-    .hov:hover, .hov2:hover, .toggle:hover {
-      transform: scale(1.2);
-    }
-
     .learning {
-      background-color: #333;
+      background-color: #2d2d2d;
       color: white;
       border-radius: 35px;
       padding: 20px;
       margin-top: 25px;
       font-size: small;
-      text-align:center;
+      text-align: center;
     }
 
     .learning h2 {
@@ -123,7 +120,7 @@
 
     .learning ul li {
       text-align: left;
-      margin-left:300px;
+      margin-left: 300px;
     }
 
     .rotated {
@@ -138,14 +135,24 @@
     footer {
       text-align: center;
       padding: 1em;
-      background-color: #333;
+      background-color: #1f1f1f;
       color: white;
     }
-    .yt{
-        float:right;
-        margin-right:50px;
+
+    .hov, .hov2, .toggle {
+      transition: transform 0.2s ease;
+      display: inline-block;
     }
-  </style>
+
+    .hov:hover, .hov2:hover, .toggle:hover {
+      transform: scale(1.2);
+    }
+
+    .yt {
+      float: right;
+      margin-right: 50px;
+    }
+</style>
 </head>
 <body>
   <nav>

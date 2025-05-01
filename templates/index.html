@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="static/bin.png">
+  <title>Decimal Converter</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cascadia+Code:ital,wght@0,200..700;1,200..700&display=swap');
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Cascadia Code';
+      display: flex;
+      flex-direction: column;
+      background-color: #f4f4f4;
+    }
+
+    nav {
+      background-color: #333;
+      color: #fff;
+      padding: 1em;
+      text-align: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+    }
+
+    nav a:hover {
+      background-color: black;
+    }
+
+    main {
+      flex: 1;
+      padding: 2em;
+      max-width: 900px;
+      margin: auto;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 1em;
+    }
+
+    input[type="text"], input[type="number"] {
+      padding: 0.5em;
+      font-size: 1em;
+    }
+
+    button {
+      padding: 0.5em;
+      font-size: 1em;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+
+    .error {
+      color: red;
+    }
+
+    .results ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .results ul li {
+      font-family: monospace;
+      font-size: 24px;
+      white-space: nowrap;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1em;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.5em;
+      text-align: center;
+    }
+
+    thead {
+      background-color: #333;
+      color: white;
+    }
+
+    .hov, .hov2, .toggle {
+      transition: transform 0.2s ease;
+      display: inline-block;
+    }
+
+    .hov:hover, .hov2:hover, .toggle:hover {
+      transform: scale(1.2);
+    }
+
+    .learning {
+      background-color: #333;
+      color: white;
+      border-radius: 35px;
+      padding: 20px;
+      margin-top: 25px;
+      font-size: small;
+      text-align:center;
+    }
+
+    .learning h2 {
+      margin-top: 0;
+    }
+
+    .learning ul li {
+      text-align: left;
+      margin-left:300px;
+    }
+
+    .rotated {
+      transform: rotate(180deg);
+      transition: transform 0.3s ease;
+    }
+
+    section {
+      margin-top: 40px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1em;
+      background-color: #333;
+      color: white;
+    }
+    .yt{
+        float:right;
+        margin-right:50px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <span class="abt"><a href="#about">About</a></span>
+    <h1>
+      <span title="Contact"><a href="#contact" class="hov2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+          <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1z"/>
+        </svg>
+      </a></span>
+      | Decimal Converter App |
+      <span title="Source_code">
+        <a href="https://github.com/yourusername" class="hov">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 
+            0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 
+            1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 
+            0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 
+            0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 
+            2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 
+            1.92.08 2.12.51.56.82 1.27.82 
+            2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 
+            1.48 0 1.07-.01 1.93-.01 2.2 0 
+            .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+          </svg>
+        </a>
+      </span>
+    </h1>
+    <span class="pri"><a href="#privacy">Privacy</a></span>
+  </nav>
+  <hr>
+
+  <main>
+    <form method="POST">
+      <label for="decimal">Enter Decimal Number:</label>
+      <input type="number" name="decimal" id="decimal" required>
+
+      <label for="text">Enter Text (for ASCII reverse):</label>
+      <input type="text" name="text" id="text">
+
+      <button type="submit">Convert</button>
+    </form>
+
+    {% if error_message %}
+    <p class="error">{{ error_message }}</p>
+    {% endif %}
+
+    <div class="results">
+      <h2>Conversion Results</h2>
+      <ul id="typingList">
+        <li><strong>Binary:</strong> {{ binary_result }}</li>
+        <li><strong>Hexadecimal:</strong> {{ hex_result }}</li>
+        <li><strong>Octal:</strong> {{ octal_result }}</li>
+        <li><strong>Scientific:</strong> {{ scientific_result }}</li>
+        <li><strong>Roman:</strong> {{ roman_result }}</li>
+        <li><strong>Text (ASCII):</strong> {{ text_result }}</li>
+        <li><strong>Reverse ASCII:</strong> {{ reverse_ascii_result }}</li>
+      </ul>
+    </div>
+
+    {% if history %}
+    <hr>
+    <h2>Last 5 Conversions</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Decimal</th>
+          <th>Binary</th>
+          <th>Hex</th>
+          <th>Octal</th>
+          <th>Scientific</th>
+          <th>Roman</th>
+          <th>ASCII Text</th>
+          <th>Reverse ASCII</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in history %}
+        <tr>
+          <td>{{ item.decimal }}</td>
+          <td>{{ item.binary }}</td>
+          <td>{{ item.hexadecimal }}</td>
+          <td>{{ item.octal }}</td>
+          <td>{{ item.scientific }}</td>
+          <td>{{ item.roman }}</td>
+          <td>{{ item.text }}</td>
+          <td>{{ item.reverse_ascii }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
+    <div class="learning">
+        <h2>Learn more about the <b id="toggleBtn"><strong><i>Number System</i></strong>   
+            <svg xmlns="http://www.w3.org/2000/svg" id="toggle" class="toggle" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+            </svg></b></h2>
+        <div id="infoPanel" style="display: none; margin-top: 10px; font-size: 16px;">
+            <hr>
+            <p>
+                <strong>Number system</strong> is the collective term for 
+                <strong>Decimal, Binary, Octal (OCT), and Hexadecimal (HEX)</strong>.
+                These are special strings of numbers or letters used as a method of representing numerical values using a set of symbols or digits.
+            </p>
+            <hr>
+            <p>
+                Some special number systems, like <strong>Binary</strong>, are the only languages that can be understood by a computer.
+            </p><hr>
+            <h3>Binary</h3><hr>
+            <p>
+                The binary system is a numeral system designed to represent numbers using only 0 and 1 as its digits. 
+                It is the only language that can be understood by a computer. <br>
+                Our site helps convert any decimal to binary, but in case you have to do it by hand or don't have internet access, there is a formula for it. <br>
+                A decimal is any digit from 0–9 and forms the numbers we all know. Since decimal numbers are just powers of 2, 
+                we can divide a number by 2 until the quotient is zero.
+            </p>
+            <hr>
+            <p>Here is an example:</p><hr>
+            <p>Sample number: <strong>13</strong><br>Calculation:</p><center><hr>
+            <ul>
+                <li>13 ÷ 2 = 6, remainder 1</li>
+                <li>6 ÷ 2 = 3, remainder 0</li>
+                <li>3 ÷ 2 = 1, remainder 1</li>
+                <li>1 ÷ 2 = 0, remainder 1</li>
+            </ul></center><hr>
+            <p>
+                Now read the remainders from bottom to top. <br>
+                Final answer: <strong>1101</strong><br><hr>
+                <label for="binary_numbers">First 5 Binary Numbers (Including 0)</label><br><hr>
+                <table>
+                    <tr><th>Decimal Number</th>
+                    <th>Binary Number</th></tr>
+                    <tr><td>0</td><td>0</td></tr>
+                    <tr><td>1</td><td>1</td></tr>
+                    <tr><td>2</td><td>10</td></tr>
+                    <tr><td>3</td><td>11</td></tr>
+                    <tr><td>4</td><td>100</td></tr>
+                    <tr><td>5</td><td>101</td></tr>
+                </table>
+            </p><hr>
+            <h3>Octal</h3><hr>
+            <p>
+                The <strong>octal number system</strong> is a base-8 numeral system that uses eight digits:
+                <code>0, 1, 2, 3, 4, 5, 6, 7</code>.
+            </p>
+            <p>
+                Each digit in an octal number represents a power of 8, just as each digit in the decimal system represents a power of 10.
+            </p>
+            <hr>
+            <p>
+                <strong>Example:</strong><br>
+                Octal number <code>127₈</code> equals:
+            </p>
+            <pre>
+    1 × 8² + 2 × 8¹ + 7 × 8⁰ 
+    = 64 + 16 + 7 
+    = <strong>87₁₀</strong>
+            </pre>
+            <hr>
+            <p>First 8 Octal Numbers:</p>
+            <table>
+                <tr><th>Decimal Number</th><th>Octal Number</th></tr>
+                <tr><td>0</td><td>0</td></tr>
+                <tr><td>1</td><td>1</td></tr>
+                <tr><td>2</td><td>2</td></tr>
+                <tr><td>3</td><td>3</td></tr>
+                <tr><td>4</td><td>4</td></tr>
+                <tr><td>5</td><td>5</td></tr>
+                <tr><td>6</td><td>6</td></tr>
+                <tr><td>7</td><td>7</td></tr>
+            </table>
+            <hr>
+            <h3>Hexadecimal</h3><hr>
+            <p>
+                The hexadecimal system is base-16 and uses 16 digits: 0–9 and A–F, where A = 10, B = 11, ..., F = 15.
+            </p>
+            <p>
+                Example: <code>1A₁₆</code> = 1×16 + 10 = <strong>26₁₀</strong>
+            </p>
+            <hr>
+            <h3>First 20 Hexadecimal Numbers</h3>
+            <hr>
+        <table>
+        <thead>
+            <tr>
+            <th>Decimal</th>
+            <th>Hexadecimal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>0</td><td>0</td></tr>
+            <tr><td>1</td><td>1</td></tr>
+            <tr><td>2</td><td>2</td></tr>
+            <tr><td>3</td><td>3</td></tr>
+            <tr><td>4</td><td>4</td></tr>
+            <tr><td>5</td><td>5</td></tr>
+            <tr><td>6</td><td>6</td></tr>
+            <tr><td>7</td><td>7</td></tr>
+            <tr><td>8</td><td>8</td></tr>
+            <tr><td>9</td><td>9</td></tr>
+            <tr><td>10</td><td>A</td></tr>
+            <tr><td>11</td><td>B</td></tr>
+            <tr><td>12</td><td>C</td></tr>
+            <tr><td>13</td><td>D</td></tr>
+            <tr><td>14</td><td>E</td></tr>
+            <tr><td>15</td><td>F</td></tr>
+            <tr><td>16</td><td>10</td></tr>
+            <tr><td>17</td><td>11</td></tr>
+            <tr><td>18</td><td>12</td></tr>
+            <tr><td>19</td><td>13</td></tr>
+        </tbody>
+        </table>
+        </div>
+    </div>    
+    <section id="about">
+      <hr>
+      <center><h2>About</h2></center><hr>
+      <p>This website is designed to help users convert decimal numbers to other formats such as binary, hexadecimal, octal, Roman numerals, and scientific notation. It also supports ASCII conversions for basic text encoding/decoding.</p>
+    </section><hr>
+    <section id="privacy">
+      <center><h2>Privacy Policy</h2></center><hr>
+      <p>This application does not collect or store any user data. All conversions are performed locally in your browser or server session, and no information is shared with third parties. By using this tool, you agree to basic usage without liability.</p>
+    </section><hr>
+    <section id="contact">
+      <center><h2>Contact</h2></center><hr>
+      <p>If you have questions, suggestions, or want to report a bug, feel free to reach out:</p>
+      <ul>
+        <li>Email: <a href="mailto:dotpy9579@gmail.com">dotpy9579@gmail.com</a></li>
+        <li>GitHub: <a href="https://github.com/Average-Programmer123" target="_blank">https://github.com/Average-Programmer123</a></li>
+      </ul>
+    </section>
+  </main>
+  <hr>
+  <footer>
+    <p>&copy; 2025 Decimal Converter App | Suyash L.C <a href="https://www.youtube.com/@program.1234" class="yt"><button ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
+        <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/>
+      </svg></button></a></p>
+  </footer>
+
+  <script>
+    const listItems = document.querySelectorAll('#typingList li');
+    listItems.forEach((li, index) => {
+      const text = li.textContent;
+      li.textContent = '';
+      setTimeout(() => {
+        let i = 0;
+        const typeChar = () => {
+          if (i < text.length) {
+            li.textContent += text.charAt(i);
+            i++;
+            setTimeout(typeChar, 40);
+          }
+        };
+        typeChar();
+      }, index * 400);
+    });
+
+    // Toggle Learn More
+    const toggleBtn = document.getElementById("toggle");
+    const infoPanel = document.getElementById("infoPanel");
+    toggleBtn.addEventListener("click", () => {
+      const isVisible = infoPanel.style.display === "block";
+      infoPanel.style.display = isVisible ? "none" : "block";
+      toggleBtn.classList.toggle("rotated", !isVisible);
+    });
+  </script>
+</body>
+</html>

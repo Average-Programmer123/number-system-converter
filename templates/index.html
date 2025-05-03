@@ -204,7 +204,7 @@
       <label for="text">Enter Text (for ASCII reverse):</label>
       <input type="text" name="text" id="text">
 
-      <button type="submit">Convert</button>
+      <button type="submit" id="cnv">Convert</button>
     </form>
 
     {% if error_message %}
@@ -214,6 +214,7 @@
     <div class="results">
       <h2>Conversion Results</h2>
       <ul id="typingList">
+        <li><strong>Decimal:</strong>{{decimal_result}}</li>
         <li><strong>Binary:</strong> {{ binary_result }}</li>
         <li><strong>Hexadecimal:</strong> {{ hex_result }}</li>
         <li><strong>Octal:</strong> {{ octal_result }}</li>
@@ -221,6 +222,7 @@
         <li><strong>Roman:</strong> {{ roman_result }}</li>
         <li><strong>Text (ASCII):</strong> {{ text_result }}</li>
         <li><strong>Reverse ASCII:</strong> {{ reverse_ascii_result }}</li>
+        <li><strong>Binary Text:</strong>{{bin_text}}</li>
       </ul>
     </div>
 
@@ -238,6 +240,7 @@
           <th>Roman</th>
           <th>ASCII Text</th>
           <th>Reverse ASCII</th>
+          <th>Binary text</th>
         </tr>
       </thead>
       <tbody>
@@ -251,6 +254,7 @@
           <td>{{ item.roman }}</td>
           <td>{{ item.text }}</td>
           <td>{{ item.reverse_ascii }}</td>
+          <td>{{item.bin_text}}</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -376,7 +380,34 @@
             <tr><td>18</td><td>12</td></tr>
             <tr><td>19</td><td>13</td></tr>
         </tbody>
-        </table>
+        </table><hr>
+        <h3>In your case</h3><hr>
+<table>
+    <tr>
+        <th>Step</th>
+        <th>Binary Division</th>
+        <th>Octal Division</th>
+        <th>Hexadecimal Division</th>
+    </tr>
+    {% for i in range(binary_steps|length) %}
+    <tr>
+        <td>Step {{ i + 1 }}</td>
+        <td>
+            {{ binary_steps[i].n }} ÷ 2 = {{ binary_steps[i].quotient }} (rem {{ binary_steps[i].remainder }})
+        </td>
+        <td>
+            {% if i < octal_steps|length %}
+                {{ octal_steps[i].n }} ÷ 8 = {{ octal_steps[i].quotient }} (rem {{ octal_steps[i].remainder }})
+            {% endif %}
+        </td>
+        <td>
+            {% if i < hex_steps|length %}
+                {{ hex_steps[i].n }} ÷ 16 = {{ hex_steps[i].quotient }} (rem {{ hex_steps[i].remainder }})
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
         </div>
     </div>    
     <section id="about">
@@ -421,8 +452,6 @@
         typeChar();
       }, index * 400);
     });
-
-    // Toggle Learn More
     const toggleBtn = document.getElementById("toggle");
     const infoPanel = document.getElementById("infoPanel");
     toggleBtn.addEventListener("click", () => {
@@ -430,6 +459,7 @@
       infoPanel.style.display = isVisible ? "none" : "block";
       toggleBtn.classList.toggle("rotated", !isVisible);
     });
+    
   </script>
 </body>
 </html>

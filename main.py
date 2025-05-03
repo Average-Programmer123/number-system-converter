@@ -62,7 +62,7 @@ def home():
     text_result = ""
     reverse_ascii_result = ""
     error_message = ""
-
+    bin_text=" "
     binary_steps = []
     octal_steps = []
     hex_steps = []

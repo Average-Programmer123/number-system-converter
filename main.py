@@ -19,43 +19,68 @@ def to_roman(n):
 
 # Function to convert decimal to other formats
 def convert_decimal(decimal):
-    binary = bin(decimal)[2:]  # Remove the "0b" prefix
-    hexadecimal = hex(decimal)[2:]  # Remove the "0x" prefix
-    octal = oct(decimal)[2:]  # Remove the "0o" prefix
+    binary = bin(decimal)[2:]
+    hexadecimal = hex(decimal)[2:]
+    octal = oct(decimal)[2:]
     scientific = "{:.2e}".format(decimal)
     roman = to_roman(decimal)
     text = ''.join([chr(int(decimal)) if 32 <= int(decimal) <= 126 else '' for decimal in str(decimal).split()])
     return binary, hexadecimal, octal, scientific, roman, text
 
-# Reverse ASCII Helper Function
-def text_to_decimal(text):
+
+def text_to_decimala(text):
     return ' '.join(str(ord(c)) for c in text)
+
+def text_to_binary(text):
+    return ' '.join(format(ord(char), '08b') for char in text)
+
+def get_conversion_steps(decimal, base):
+    steps = []
+    n = decimal
+    while n > 0:
+        quotient = n // base
+        remainder = n % base
+        steps.append({
+            'n': n,
+            'quotient': quotient,
+            'remainder': remainder
+        })
+        n = quotient
+    return steps
 
 # Store conversion history in-memory
 history = []
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    decimal_result = ""
     binary_result = ""
     hex_result = ""
     octal_result = ""
     scientific_result = ""
     roman_result = ""
     text_result = ""
-    error_message = ""
     reverse_ascii_result = ""
-    
+    error_message = ""
+
+    binary_steps = []
+    octal_steps = []
+    hex_steps = []
+
     if request.method == 'POST':
         decimal_input = request.form['decimal']
         text_input = request.form.get('text')
-        
-        # Check if decimal input is valid
         if decimal_input.isdigit():
             decimal = int(decimal_input)
             binary_result, hex_result, octal_result, scientific_result, roman_result, text_result = convert_decimal(decimal)
-            reverse_ascii_result = text_to_decimal(text_input) if text_input else ""
-            
-            # Add to history
+            decimal_result = decimal_input
+            reverse_ascii_result = text_to_decimala(text_input) if text_input else ""
+            bin_text = text_to_binary(text_input)
+
+            binary_steps = get_conversion_steps(decimal, 2)
+            octal_steps = get_conversion_steps(decimal, 8)
+            hex_steps = get_conversion_steps(decimal, 16)
+
             history.append({
                 'decimal': decimal,
                 'binary': binary_result,
@@ -64,26 +89,29 @@ def home():
                 'scientific': scientific_result,
                 'roman': roman_result,
                 'text': text_result,
-                'reverse_ascii': reverse_ascii_result
+                'reverse_ascii': reverse_ascii_result,
+                'bin_text':bin_text
             })
-            
-            # Keep history to the latest 5 entries
             if len(history) > 5:
                 history.pop(0)
-                
         else:
             error_message = "Please enter a valid decimal number."
-    
-    return render_template('index.html', 
-                           binary_result=binary_result, 
-                           hex_result=hex_result, 
+
+    return render_template('index.html',
+                           decimal_result=decimal_result,
+                           binary_result=binary_result,
+                           hex_result=hex_result,
                            octal_result=octal_result,
                            scientific_result=scientific_result,
                            roman_result=roman_result,
                            text_result=text_result,
                            reverse_ascii_result=reverse_ascii_result,
+                           bin_text = bin_text,
                            error_message=error_message,
-                           history=history)
+                           history=history,
+                           binary_steps=binary_steps,
+                           octal_steps=octal_steps,
+                           hex_steps=hex_steps)
 
 if __name__ == "__main__":
     app.run(debug=True)

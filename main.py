@@ -27,7 +27,6 @@ def convert_decimal(decimal):
     text = ''.join([chr(int(decimal)) if 32 <= int(decimal) <= 126 else '' for decimal in str(decimal).split()])
     return binary, hexadecimal, octal, scientific, roman, text
 
-
 def text_to_decimala(text):
     return ' '.join(str(ord(c)) for c in text)
 
@@ -62,14 +61,20 @@ def home():
     text_result = ""
     reverse_ascii_result = ""
     error_message = ""
-    bin_text=" "
+    bin_text = ""
+
     binary_steps = []
     octal_steps = []
     hex_steps = []
 
+    # Variables for the sum and conversion results from the form
+    sum_result = None
+    a = b = c = ""
+
     if request.method == 'POST':
-        decimal_input = request.form['decimal']
+        decimal_input = request.form.get('decimal', '').strip()
         text_input = request.form.get('text')
+
         if decimal_input.isdigit():
             decimal = int(decimal_input)
             binary_result, hex_result, octal_result, scientific_result, roman_result, text_result = convert_decimal(decimal)
@@ -80,7 +85,36 @@ def home():
             binary_steps = get_conversion_steps(decimal, 2)
             octal_steps = get_conversion_steps(decimal, 8)
             hex_steps = get_conversion_steps(decimal, 16)
+        optc =  request.form.get('oper')
+        try:
+            num1 = float(request.form.get('num1', ''))
+            num2 = float(request.form.get('num2', ''))
+            
+            if optc == "Add":
+                sum_result = num1 + num2
+                a = hex(int(sum_result))[2:]
+                b = bin(int(sum_result))[2:]
+                c = oct(int(sum_result))[2:]
+            elif optc == "Subtract":
+                sum_result = num1 - num2
+                a = hex(int(sum_result))[2:]
+                b = bin(int(sum_result))[2:]
+                c = oct(int(sum_result))[2:]
+            elif optc == "Multiply":
+                sum_result = num1 * num2
+                a = hex(int(sum_result))[2:]
+                b = bin(int(sum_result))[2:]
+                c = oct(int(sum_result))[2:]
+            elif optc == "Divide":
+                sum_result = num1 / num2
+                a = hex(int(sum_result))[2:]
+                b = bin(int(sum_result))[2:]
+                c = oct(int(sum_result))[2:]
 
+        except ValueError:
+            sum_result = "Please enter valid numbers."
+
+            # Save conversion history
             history.append({
                 'decimal': decimal,
                 'binary': binary_result,
@@ -90,10 +124,11 @@ def home():
                 'roman': roman_result,
                 'text': text_result,
                 'reverse_ascii': reverse_ascii_result,
-                'bin_text':bin_text
+                'bin_text': bin_text
             })
             if len(history) > 5:
                 history.pop(0)
+
         else:
             error_message = "Please enter a valid decimal number."
 
@@ -106,12 +141,14 @@ def home():
                            roman_result=roman_result,
                            text_result=text_result,
                            reverse_ascii_result=reverse_ascii_result,
-                           bin_text = bin_text,
+                           bin_text=bin_text,
                            error_message=error_message,
                            history=history,
                            binary_steps=binary_steps,
                            octal_steps=octal_steps,
-                           hex_steps=hex_steps)
+                           hex_steps=hex_steps,
+                           sum_result=sum_result, a=a, b=b, c=c)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

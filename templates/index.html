@@ -163,6 +163,11 @@
       float: right;
       margin-right: 50px;
     }
+
+    select{
+      text-align:center;
+      font-size:larger;
+    }
 </style>
 </head>
 <body>
@@ -198,13 +203,29 @@
 
   <main>
     <form method="POST">
+      <h2>Conversion:</h2>
       <label for="decimal">Enter Decimal Number:</label>
-      <input type="number" name="decimal" id="decimal" min = "0" required>
+      <input type="number" name="decimal" id="decimal" required>
 
-      <label for="text">Enter Text (for ASCII reverse and Decimal Conversion):</label>
+      <label for="text">Enter Text (for ASCII reverse):</label>
       <input type="text" name="text" id="text">
 
       <button type="submit" id="cnv">Convert</button>
+      <h2>Operations:</h2>
+    </form>
+    <form method="Post">
+    <label for="decimal1">Enter Decimal Number (To operate):</label>
+      <input type="number" name="num1" id="num1" required>
+
+      <label for="text">Enter Decimal Number (To operate):</label>
+      <input type="number" name="num2" id="num2">
+      <select name = "oper" id = "oper">
+        <option value = "Add">+</option>
+        <option value = "Subtract">-</option>
+        <option value = "Multiply">x</option>
+        <option value = "Divide">÷</option>
+      </select>
+      <button type = "submit" id="opt">Operate</button>
     </form>
 
     {% if error_message %}
@@ -223,6 +244,14 @@
         <li><strong>Text (ASCII):</strong> {{ text_result }}</li>
         <li><strong>Reverse ASCII:</strong> {{ reverse_ascii_result }}</li>
         <li><strong>Binary Text:</strong>{{bin_text}}</li>
+      </ul>
+      <ul><span class="optr">
+        {%if sum_result%}
+        <li><strong>Hexadecimal sum:</strong>{{a}}</li>
+        <li><strong>Binary sum:</strong>{{b}}</li>
+        <li><strong>Octal sum:</strong>{{c}}</li>
+        <li><strong></strong>{{d}}</li>
+        {%endif%}</span>
       </ul>
     </div>
 

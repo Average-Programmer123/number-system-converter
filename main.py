@@ -95,21 +95,25 @@ def home():
                         a = hex(int(sum_result))[2:]
                         b = bin(int(sum_result))[2:]
                         c = oct(int(sum_result))[2:]
+                        d = sum_result
                     elif optc == "Subtract":
                         sum_result = num1 - num2
                         a = hex(int(sum_result))[2:]
                         b = bin(int(sum_result))[2:]
                         c = oct(int(sum_result))[2:]
+                        d = sum_result
                     elif optc == "Multiply":
                         sum_result = num1 * num2
                         a = hex(int(sum_result))[2:]
                         b = bin(int(sum_result))[2:]
                         c = oct(int(sum_result))[2:]
+                        d = sum_result
                     elif optc == "Divide":
                         sum_result = num1 / num2
                         a = hex(int(sum_result))[2:]
                         b = bin(int(sum_result))[2:]
                         c = oct(int(sum_result))[2:]
+                        d = sum_result
                 except ValueError:
                         sum_result = "Please enter valid numbers."
             elif whtt == "Binary":
@@ -135,6 +139,7 @@ def home():
                         a = hex(int(result))[2:]
                         b = bin(int(result))[2:]
                         c = oct(int(result))[2:]
+                        d = result
 
                     except ValueError:
                         sum_result = "Invalid binary input. Please enter valid binary numbers (e.g., 1010)."
@@ -161,6 +166,7 @@ def home():
                         a = hex(int(result))[2:]
                         b = bin(int(result))[2:]
                         c = oct(int(result))[2:]
+                        d = result
 
                     except ValueError:
                         sum_result = "Invalid binary input. Please enter valid binary numbers (e.g., 1A)."
@@ -188,6 +194,7 @@ def home():
                         a = hex(int(result))[2:]
                         b = bin(int(result))[2:]
                         c = oct(int(result))[2:]
+                        d = result
 
                     except ValueError:
                         sum_result = "Invalid binary input. Please enter valid binary numbers (e.g., 1010)."
@@ -226,6 +233,7 @@ def home():
                            octal_steps=octal_steps,
                            hex_steps=hex_steps,
                            sum_result=sum_result, a=a, b=b, c=c)
-    
+
+
 if __name__ == "__main__":
     app.run(debug=True)

@@ -5,7 +5,7 @@
     <meta property="og:title" content="Number System Converter" />
     <meta property="og:description" content="Have trouble converting number systems, Roman numbers or Scientific symbols? Our site will help with that. Click this link to do it." />
     <meta property="og:image" content="https://w7.pngwing.com/pngs/462/604/png-transparent-binary-file-computer-icons-binary-code-binary-number-symbol-binary-code-miscellaneous-angle-text.png" />
-    <meta property="og:url" content="https://nsc-s4vw.onrender.com/>
+    <meta property="og:url" content="https://nsc-s4vw.onrender.com>
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Number system converter" />
@@ -324,9 +324,14 @@
         <option value = "Multiply">x</option>
         <option value = "Divide">÷</option>
       </select>
+      <select name = "wht" id = "wht">
+        <option value = "Decimal">Decimal</option>
+        <option value = "Hexadecimal">Hexadecimal</option>
+        <option value = "Binary">Binary</option>
+        <option value = "Octal">Octal</option>
+      </select>
       <button type = "submit" id="opt">Operate</button>
     </form>
-
     {% if error_message %}
     <p class="error">{{ error_message }}</p>
     {% endif %}

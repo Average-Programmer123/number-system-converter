@@ -232,7 +232,7 @@ def home():
                            binary_steps=binary_steps,
                            octal_steps=octal_steps,
                            hex_steps=hex_steps,
-                           sum_result=sum_result, a=a, b=b, c=c)
+                           sum_result=sum_result, a=a, b=b, c=c, d=d)
 
 
 if __name__ == "__main__":

@@ -67,7 +67,7 @@ def home():
 
     # Variables for the sum and conversion results from the form
     sum_result = None
-    a = b = c = ""
+    a = b = c = d = ""
 
     if request.method == 'POST':
             decimal_input = request.form.get('decimal', '').strip()

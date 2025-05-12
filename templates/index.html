@@ -2,22 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="google-adsense-account" content="ca-pub-6782733985170777">
-    <meta name="google-adsense-account-verification" content="ca-pub-6782733985170777">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6782733985170777"
-     crossorigin="anonymous"></script>
     <meta property="og:title" content="Number System Converter" />
-    <meta property="og:description" content="Have trouble converting or doing arithmetic with number systems, Roman numbers or Scientific symbols? Our site will help with that. Click this link to do it." />
+    <meta property="og:description" content="Have trouble converting number systems, Roman numbers or Scientific symbols? Our site will help with that. Click this link to do it." />
     <meta property="og:image" content="https://w7.pngwing.com/pngs/462/604/png-transparent-binary-file-computer-icons-binary-code-binary-number-symbol-binary-code-miscellaneous-angle-text.png" />
     <meta property="og:url" content="https://nsc-s4vw.onrender.com>
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Number system converter" />
-    <meta name="twitter:description" content="Have trouble converting or doing arithmetic with number systems, Roman numbers or Scientific symbols? Our site will help with that. Click this link to do it." />
+    <meta name="twitter:description" content="Have trouble converting number systems, Roman numbers or Scientific symbols? Our site will help with that. Click this link to do it." />
     <meta name="twitter:image" content="https://w7.pngwing.com/pngs/462/604/png-transparent-binary-file-computer-icons-binary-code-binary-number-symbol-binary-code-miscellaneous-angle-text.png" />
     <link rel="icon" type="image/png" href="static/bin.png">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6782733985170777"
+     crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-6782733985170777">
     <meta name="google-site-verification" content="VtqanRWNr97xDoCNt1jOmxNSs32tBAF1QWXhJg_tVQQ" />
-    <meta name="description" content="This site converts and performs arithmetic on number systems like Decimal to Binary, Hexadecimal and Octal. Except for that it can convert text to reverse ASCII and binary. Enjoy!">
+    <meta name="description" content="This site converts from Decimal to Binary, Hexadecimal and Octal. Except for that it can convert text to reverse ASCII and binary. Enjoy!">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://nsc-s4vw.onrender.com">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -396,12 +395,14 @@
     {% endif %}
 
     <div class="learning">
+    <article>
         <h2>Learn more about the <b id="toggleBtn"><strong><i>Number System</i></strong>   
             <svg xmlns="http://www.w3.org/2000/svg" id="toggle" class="toggle" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
             </svg></b></h2>
         <div id="infoPanel" style="display: none; margin-top: 10px; font-size: 16px;">
             <hr>
+            <u><a href="#binn">Already know basics of Number system? Learn about Binary.</a></u>
             <p>
                 <strong>Number system</strong> is the collective term for 
                 <strong>Decimal, Binary, Octal (OCT), and Hexadecimal (HEX)</strong>.
@@ -411,7 +412,8 @@
             <p>
                 Some special number systems, like <strong>Binary</strong>, are the only languages that can be understood by a computer.
             </p><hr>
-            <h3>Binary</h3><hr>
+            <h3 id="binn">Binary</h3><hr>
+            <u><a href="#octt">Already know about Binary? Learn about Octal.</a></u>
             <p>
                 The binary system is a numeral system designed to represent numbers using only 0 and 1 as its digits. 
                 It is the only language that can be understood by a computer. <br>
@@ -443,7 +445,8 @@
                     <tr><td>5</td><td>101</td></tr>
                 </table>
             </p><hr>
-            <h3>Octal</h3><hr>
+            <h3 id="octt">Octal</h3><hr>
+            <u><a href="#hexx">Already know about Octal? Learn about Hexadecimal.</a></u>
             <p>
                 The <strong>octal number system</strong> is a base-8 numeral system that uses eight digits:
                 <code>0, 1, 2, 3, 4, 5, 6, 7</code>.
@@ -475,7 +478,8 @@
                 <tr><td>7</td><td>7</td></tr>
             </table>
             <hr>
-            <h3>Hexadecimal</h3><hr>
+            <h3 id="hexx">Hexadecimal</h3><hr>
+            <u><a href="#iyc">Want to know how it works in your case? Click here.</a></u>
             <p>
                 The hexadecimal system is base-16 and uses 16 digits: 0–9 and A–F, where A = 10, B = 11, ..., F = 15.
             </p>
@@ -515,7 +519,7 @@
             <tr><td>19</td><td>13</td></tr>
         </tbody>
         </table><hr>
-        <h3>In your case</h3><hr>
+        <h3 id="iyc">In your case</h3><hr>
 <table>
     <tr>
         <th>Step</th>
@@ -543,6 +547,7 @@
     {% endfor %}
 </table>
         </div>
+        </article>
     </div>    
     <section id="about">
       <hr>
